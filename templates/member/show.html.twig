@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Membre n°{{ member.id }}{% endblock %}
+
+{% block main %}
+    <h1>{{ member.nom }}</h1>
+
+    {% dump member %}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ member.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ member.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ member.description }}</td>
+            </tr>
+            <tr>
+        </tbody>
+    </table>
+     <div class="text-center">
+        <a href="{{ path('rack_show', {'id': member.rack.id}) }}">Acceder au rack</a>
+    </div>
+    <h2>Galeries du membre</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Publiée</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for galerie in galeries %}
+            <tr>
+                <td>{{ galerie.id }}</td>
+                <td>{{ galerie.description }}</td>
+                <td>{{ galerie.publiee ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_galerie_show', {'id': galerie.id}) }}">Voir</a>
+                    <a href="{{ path('app_galerie_edit', {'id': galerie.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucune galerie trouvée pour ce membre</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_galerie_new', {'id': member.id}) }}">Creer une nouvelle galerie</a>
+
+    <br>
+    <br>
+    <a href="{{ path('app_member') }}">Retour à la liste des membres</a>
+
+{% endblock %}

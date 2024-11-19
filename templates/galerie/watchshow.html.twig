@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}watch n°{{ watch.id }}{% endblock %}
+
+{% block main %}
+    <h1>{{ watch.name }}</h1>
+
+       {% dump watch %}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ watch.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ watch.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ watch.description}}</td>
+            </tr>
+        </tbody>
+    </table>
+	<br>
+	<br>
+	<a href="{{ path('app_galerie_show', { 'id': galerie.id}) }}">back to galerie</a>
+
+
+{% endblock %} {# body #} 
+{# ... #} 

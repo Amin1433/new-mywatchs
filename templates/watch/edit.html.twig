@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Watch{% endblock %}
+
+{% block main %}
+    <h1>Edit Watch</h1>
+
+    {{ include('watch/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('watch/_delete_form.html.twig') }}
+
+
+	<a href="{{ path('rack_show', {'id': watch.rack.id}) }}">back to rack</a>
+
+{% endblock %}

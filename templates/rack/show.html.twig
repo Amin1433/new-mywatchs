@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}rack n°{{ rack.id }}{% endblock %}
+
+{% block main %}
+    <h1>{{ rack.nom }}</h1>
+
+       {% dump rack %}
+
+    <table class="table">
+          <tbody>
+              <tr>
+                  <th>Id</th>
+                  <td>{{ rack.id }}</td>
+              </tr>
+              <tr>
+                <th>Name</th>
+                <td>{{ rack.nom}}</td>
+              </tr>
+              <tr>
+                  <th>Watchs</th>
+                  <td>
+                  <ul>
+                  {%  for watch in rack.watchs %}
+                  <li>
+                    <a href="{{ path('app_watch_show', {'id': watch.id}) }}">{{ watch.name }}</a>
+                  </li>
+                  {% endfor %}
+                  </ul> 
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+     <a href="{{ path('app_watch_new', {'id': rack.id}) }}">Add new</a>
+    <br>
+    <br>
+	<a href="{{ path('member_show', {'id': rack.member.id}) }}">back to member</a>
+
+{% endblock %} {# body #} 
+{# ... #} 

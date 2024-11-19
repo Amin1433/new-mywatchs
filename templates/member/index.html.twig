@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des membres :{% endblock %}
+
+
+{% block main %}
+    
+       {% dump members %}
+      
+    <h1>Liste des membres :</h1>
+    
+    {% if members is not empty %}
+        <ul>
+            {% for member in members %}
+                <li><a href="{{ path('member_show', {'id': member.id}) }}"> Id {{ member.id}} : {{ member.nom}}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun membre inscrit.</p>
+    {% endif %}
+
+{% endblock %} 
+

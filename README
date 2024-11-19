@@ -1,0 +1,27 @@
+
+
+### Projet : MyWatchs
+
+## Entités crées:
+
+- Rack (Inventaire) : Id, Nom, Description
+- Watch (Objet) : Id, Name, Description
+
+Seules les proprietés basiques ont été ajouté pour ne pas compliqué le code au debut du projet.
+
+## Relations
+
+- OneToMany : Un Rack peut contenir de 0 à n Watch.
+- ManyToOne : Une Watch appartient à un Rack.
+
+## Controllers
+
+- RackController :
+	La route "/rack" mene a la page par defaut, (aucune modification de celle-ci n'etait a réaliser dans le guide du projet à ce stade d'avancement)
+	La route "/rack/list" mene a la page où tout les racks sont affichés, il y'a des hyperliens menant a la page d'affichage individuelle de chaque rack.
+	La route "/rack/{id}" mene a la page d'affichage individuelle du rack d'id {id}, on y voit toute ses proprietés et toute le smontres qu'il contient, avec un hyperlien vers chacune des montre et un hyperlien de retour a la liste des racks.
+	
+- WatchController : 
+	La route "/watch/{id}" mene a la page d'affichage individuelle de la watch d'id {id}, il y'a un hyperlien de retour au rack auquelle elle appartient.
+	
+## Toute les pages sont codées avec TWIG, les datafixtures ont été rajoutées, et l'integralités des étapes jusqu'au CSS ont été réalisées.

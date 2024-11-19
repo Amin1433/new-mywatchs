@@ -17,6 +17,10 @@ framework:
     php_errors:
         log: true
 
+    # Configure the base path for assets
+    assets:
+        base_path: '/startbootstrap-bare-gh-pages'
+
 when@test:
     framework:
         test: true

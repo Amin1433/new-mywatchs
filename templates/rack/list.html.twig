@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des racks de tous les membres :{% endblock %}
+
+
+{% block main %}
+    
+       {% dump racks %}
+      
+    <h1>Liste des présentoirs à montres (rack) de tous les membres :</h1>
+    
+    {% if racks is not empty %}
+        <ul>
+            {% for rack in racks %}
+                <li><a href="{{ path('rack_show', {'id': rack.id}) }}"> un rack d'id : {{ rack.id}}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun rack disponible.</p>
+    {% endif %}
+
+{% endblock %} 
+

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}watch n°{{ watch.id }}{% endblock %}
+
+{% block main %}
+    <h1>{{ watch.name }}</h1>
+
+       {% dump watch %}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ watch.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ watch.name }}</td>
+            </tr>
+            <tr>
+    			<th>Image</th>
+    			<td><img src="{{ vich_uploader_asset(watch, 'imageFile') }}"/></td>
+			</tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ watch.description}}</td>
+            </tr>
+            <tr>
+                <th>Rack id</th>
+                <td>{{ watch.rack.id}}</td>
+            </tr>
+        </tbody>
+    </table>
+    &nbsp;
+                    <a href="{{ path('app_watch_edit', {'id': watch.id}) }}">edit</a>
+    &nbsp;
+                    <a href="{{ path('app_watch_delete', {'id': watch.id}) }}">delete</a>
+	<br>
+	<br>
+	<a href="{{ path('rack_show', {'id': watch.rack.id}) }}">back to rack</a>
+
+
+{% endblock %} {# body #} 
+{# ... #} 

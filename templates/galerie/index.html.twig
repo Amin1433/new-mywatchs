@@ -3,31 +3,32 @@
 {% block title %}Galerie index{% endblock %}
 
 {% block main %}
-    <h1>Galerie index</h1>
+    <h1>Galeries publiée</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Nom</th>
                 <th>Description</th>
-                <th>Publiée</th>
-                <th>actions</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
         {% for galerie in galeries %}
-            <tr>
-                <td>{{ galerie.id }}</td>
-                <td>{{ galerie.description }}</td>
-                <td>{{ galerie.publiee ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_galerie_show', {'id': galerie.id}) }}">show</a>
-                    <a href="{{ path('app_galerie_edit', {'id': galerie.id}) }}">edit</a>
-                </td>
-            </tr>
+            {% if galerie.publiee %}
+                <tr>
+                    <td>{{ galerie.id }}</td>
+                    <td>{{ galerie.name }}</td>
+                    <td>{{ galerie.description }}</td>
+                    <td>
+                        <a href="{{ path('app_galerie_show', {'id': galerie.id}) }}">show</a>
+                    </td>
+                </tr>
+            {% endif %}
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucun membre n'a publié de galerie</td>
             </tr>
         {% endfor %}      
         </tbody>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}rack n°{{ rack.id }}{% endblock %}
+{% block title %}Presentoire n°{{ rack.id }}{% endblock %}
 
 {% block main %}
     <h1>{{ rack.nom }}</h1>
@@ -18,7 +18,7 @@
                 <td>{{ rack.nom}}</td>
               </tr>
               <tr>
-                  <th>Watchs</th>
+                  <th>Montres</th>
                   <td>
                   <ul>
                   {%  for watch in rack.watchs %}
@@ -31,10 +31,10 @@
               </tr>
           </tbody>
       </table>
-     <a href="{{ path('app_watch_new', {'id': rack.id}) }}">Add new</a>
+     <a href="{{ path('app_watch_new', {'id': rack.id}) }}">ajouter montre</a>
     <br>
     <br>
-	<a href="{{ path('member_show', {'id': rack.member.id}) }}">back to member</a>
+	<a href="{{ path('member_show', {'id': rack.member.id}) }}">revenir au profil</a>
 
 {% endblock %} {# body #} 
 {# ... #} 

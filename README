@@ -1,27 +1,110 @@
 
 
-### Projet : MyWatchs
+### Projet : MyWatchs ###
 
-## Entités crées:
+## Fonctionnalités actuelles :
+	Toutes les étapes obligatoires ont été codées, incluant les entités Objet, Inventaire, Galerie, et Utilisateur, ainsi que leurs fixtures associées.
+	Fonctionnalités supplémentaires implémentées :
+	
+	Utilisateurs de test disponibles :
+	Deux utilisateurs fictifs sont configurés pour démontrer la gestion des droits d'accès (l'un n'a pas accées au données privées de l'autre):
+	        Utilisateur 1 : Email slash@localhost, mot de passe 123456
+	        Utilisateur 2 : Email olivier@localhost, mot de passe 123456
+	
+	L'ajout d'image est bien implementé et fonctionne.
+	
+	Fonctionnalités selon le type d'utilisateur :
+	En tant que membre connecté :
+	    Accès à votre inventaire (Rack).
+	    Possibilité d'éditer vos galeries ainsi que les montres qu'elles contiennent.
+	
+	En tant que visiteur non connecté :
+	    Accès à la liste des galeries publiées et des objets qu'elles contiennent.
+	    Accès à la liste des membres.
 
-- Rack (Inventaire) : Id, Nom, Description
-- Watch (Objet) : Id, Name, Description
 
-Seules les proprietés basiques ont été ajouté pour ne pas compliqué le code au debut du projet.
 
-## Relations
 
-- OneToMany : Un Rack peut contenir de 0 à n Watch.
-- ManyToOne : Une Watch appartient à un Rack.
+## Entités créées :
+
+    Rack (Inventaire) :
+    Attributs : Id, Nom, Description
+
+    Watch (Objet) :
+    Attributs : Id, Name, Description, ImageName, ImageSize, UpdatedAt
+
+    Member (Utilisateur) :
+    Attributs : Id, Email, Roles, Password, Nom, Description
+
+    Galerie :
+    Attributs : Id, Name, Description, Publiee
+
+## Relations :
+
+    Rack :
+        OneToMany : Un Rack peut contenir de 0 à N Watch.
+        OneToOne : Un Rack est associé à un seul Member.
+
+    Watch :
+        ManyToOne : Une Watch appartient à un Rack.
+        ManyToMany : Une Watch peut être associée à plusieurs Galeries.
+
+    Member :
+        OneToOne : Un Member possède un Rack.
+        OneToMany : Un Member peut créer plusieurs Galeries.
+
+    Galerie :
+        ManyToOne : Une Galerie est créée par un seul Member.
+        ManyToMany : Une Galerie peut contenir plusieurs Watchs.
 
 ## Controllers
 
-- RackController :
-	La route "/rack" mene a la page par defaut, (aucune modification de celle-ci n'etait a réaliser dans le guide du projet à ce stade d'avancement)
-	La route "/rack/list" mene a la page où tout les racks sont affichés, il y'a des hyperliens menant a la page d'affichage individuelle de chaque rack.
-	La route "/rack/{id}" mene a la page d'affichage individuelle du rack d'id {id}, on y voit toute ses proprietés et toute le smontres qu'il contient, avec un hyperlien vers chacune des montre et un hyperlien de retour a la liste des racks.
+	RackController :
 	
-- WatchController : 
-	La route "/watch/{id}" mene a la page d'affichage individuelle de la watch d'id {id}, il y'a un hyperlien de retour au rack auquelle elle appartient.
+	    La route "/rack" mène à la page par défaut. (Aucune modification de celle-ci n'était à réaliser dans le guide du projet à ce stade d'avancement.)
+	    La route "/rack/list" mène à la page où tous les racks sont affichés. Il y a des hyperliens menant à la page d'affichage individuelle de chaque rack.
+	    La route "/rack/{id}" mène à la page d'affichage individuelle du rack d'id {id}. On y voit toutes ses propriétés et toutes les montres qu'il contient, avec un hyperlien vers chacune des montres et un hyperlien de retour à la liste des racks.
 	
-## Toute les pages sont codées avec TWIG, les datafixtures ont été rajoutées, et l'integralités des étapes jusqu'au CSS ont été réalisées.
+	WatchController :
+	
+	    La route "/watch" mène à la liste de toutes les montres disponibles.
+	    La route "/watch/new/{id}" permet d’ajouter une nouvelle montre associée au rack identifié par {id}. Une fois créée, elle redirige vers la page d'affichage du rack correspondant.
+	    La route "/watch/{id}" mène à la page d'affichage individuelle de la montre d'id {id}. Il y a un hyperlien de retour au rack auquel elle appartient.
+	    La route "/watch/{id}/edit" permet d’éditer les informations de la montre d'id {id}. Une fois modifiée, elle redirige vers la page du rack auquel elle appartient.
+	    La route "/watch/{id}" (DELETE) permet de supprimer une montre identifiée par {id} après validation CSRF. Une fois supprimée, elle redirige vers la page du rack associé.
+	
+	GalerieController :
+	
+	    La route "/galerie" mène à une page listant toutes les galeries publiées.
+	    La route "/galerie/new/{id}" permet de créer une nouvelle galerie pour le membre identifié par {id}. Une fois créée, elle redirige vers la page du membre.
+	    La route "/galerie/{id}" mène à la page d'affichage individuelle de la galerie d'id {id}, où toutes ses informations sont affichées.
+	    La route "/galerie/{id}/edit" permet de modifier les informations de la galerie d'id {id}. Une fois modifiée, elle redirige vers la page du membre associé.
+	    La route "/galerie/{id}" (DELETE) permet de supprimer une galerie identifiée par {id} après validation CSRF. Une fois supprimée, elle redirige vers la page du membre associé.
+	    La route "/galerie/watch/{id}" permet d’afficher une montre spécifique appartenant à une galerie d'id {id}.
+	
+	LoginController :
+	
+	    La route "/" mène à la page d'accueil par défaut.
+	    La route "/login" mène à la page de connexion. Si des erreurs d’authentification sont présentes, elles sont affichées sur cette page.
+	    La route "/logout" permet de déconnecter l’utilisateur.
+	
+	MemberController :
+	
+	    La route "/member" mène à la liste de tous les membres disponibles.
+	    La route "/member/{id}" mène à la page d'affichage individuelle du membre identifié par {id}, où ses informations et toutes ses galeries sont affichées.
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

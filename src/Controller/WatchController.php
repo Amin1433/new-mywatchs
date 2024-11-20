@@ -29,7 +29,9 @@ final class WatchController extends AbstractController
     {
         $watch = new Watch();
         $watch->setRack($rack);
-        $form = $this->createForm(WatchType::class, $watch);
+        $form = $this->createForm(WatchType::class, $watch, [
+            'member' => $rack -> getMember(),
+        ]);
         $form->handleRequest($request);
         
         $valid=false;
@@ -86,7 +88,9 @@ final class WatchController extends AbstractController
     public function edit(Request $request, Watch $watch, EntityManagerInterface $entityManager): Response
     {
         $rack = $watch->getRack();
-        $form = $this->createForm(WatchType::class, $watch);
+        $form = $this->createForm(WatchType::class, $watch, [
+            'member' => $rack -> getMember(),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -113,4 +117,5 @@ final class WatchController extends AbstractController
 
         return $this->redirectToRoute('rack_show', ['id' => $rack->getId()], Response::HTTP_SEE_OTHER);
     }
+    
 }

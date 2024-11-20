@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Galerie{% endblock %}
+{% block title %}Nouvelle Galerie{% endblock %}
 
 {% block main %}
-    <h1>Create new Galerie</h1>
+    <h1>Nouvelle Galerie</h1>
 
     {{ include('galerie/_form.html.twig') }}
-
-    <a href="{{ path('app_galerie_index') }}">back to list</a>
+	<br>
+	<a href="{{ path('member_show', {'id': galerie.creator.id}) }}">revenir au profil</a>
 {% endblock %}

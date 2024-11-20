@@ -2,9 +2,12 @@ bootstrap_menu:
   menus:
     main:
       items:
-        racks:
-          label: 'Liste des racks'
-          route: 'rack_list'
+        members:
+          label: 'Membres'
+          route: 'app_member'
+        galeries:
+          label: 'Galerie publiée'
+          route: 'app_galerie_index'
     anonymousaccount:
       items:
         login:

@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Entity\Rack;
@@ -23,7 +24,7 @@ class AppFixtures extends Fixture
     private function membersGenerator()
     {
         yield ['olivier@localhost', '123456', 'Olivier', 'Collectionneur passionné de montres.', 'ROLE_USER'];
-        yield ['slash@localhost', '123456', 'Slash', 'Amateur de montres modernes.', 'ROLE_ADMIN'];
+        yield ['slash@localhost', '123456', 'Slash', 'Amateur de montres modernes.', 'ROLE_USER'];
     }
     
     public function load(ObjectManager $manager): void

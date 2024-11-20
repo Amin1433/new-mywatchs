@@ -77,15 +77,37 @@
             <main>
         
               {# Ici la partie utile que les gabarits des pages vont surcharger #}
-              {% block main %}
-              <div class="row">
-                <div class="col-md-12">
-                  <p>
-                    <i>MAIN</i>
-                  </p>
+            {% block main %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <p> <i> Bienvenue sur mon site </i> </p>
+                        <p> Voici la liste des entités disponibles : </p>
+                        <ul>
+                            <li> <strong>Watch</strong> : Les montres  </li>
+                            <li> <strong>Rack</strong> : Les présentoirs </li>
+                            <li> <strong>Galerie</strong> : Les galeries  </li>
+                            <li> <strong>Member</strong> : Les membres </li>
+                        </ul>
+                        	<p> <strong> Voici deux utilisateurs lambdas pour essayer et bien voir qu'ils n'ont pas accés au données privées de l'autre' </strong> <p>
+            				<p> slash@localhost   123456 <p>
+            				<p> olivier@localhost    123456 <p>
+
+                            <p><strong>En tant que membre connecté :</strong> </p>
+                            <ul>
+                                <li>Vous pouvez accéder à votre inventaire (rack).</li>
+                                <li>Vous pouvez éditer vos galeries et les montres qu'elles contiennent.</li>
+                            </ul>
+
+                            <p><strong>En tant que visiteur non connecté :</strong></p>
+                            <ul>
+                                <li>Vous avez accès à la liste des galeries publiées et des objets qu'elles contiennent à partir de l'indexation de la galerie.</li>
+                                <li>Vous avez accès à la liste des membres.</li>
+                            </ul>
+
+                    </div>
                 </div>
-              </div>
-              {% endblock %} {# main #}
+            {% endblock %}
+              
         
             </main>
         
@@ -95,7 +117,7 @@
                    {% block footer %}
           <footer class="text-center text-lg-start bg-light text-muted">
             <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-              Projet CSC4101
+              FOOTER
             </div>
           </footer>
           {% endblock %}{# footer #}

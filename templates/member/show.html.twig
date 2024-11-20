@@ -24,15 +24,18 @@
             <tr>
         </tbody>
     </table>
-     <div class="text-center">
-        <a href="{{ path('rack_show', {'id': member.rack.id}) }}">Acceder au rack</a>
-    </div>
+                {% if app.user and app.user.id == member.id %}
+                 <div class="text-center">
+                    <a href="{{ path('rack_show', {'id': member.rack.id}) }}">Acceder au presentoire</a>
+                </div>
+                {% endif %}
     <h2>Galeries du membre</h2>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Nom</th>
                 <th>Description</th>
                 <th>Publiée</th>
                 <th>Actions</th>
@@ -40,24 +43,47 @@
         </thead>
         <tbody>
         {% for galerie in galeries %}
-            <tr>
-                <td>{{ galerie.id }}</td>
-                <td>{{ galerie.description }}</td>
-                <td>{{ galerie.publiee ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_galerie_show', {'id': galerie.id}) }}">Voir</a>
-                    <a href="{{ path('app_galerie_edit', {'id': galerie.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Aucune galerie trouvée pour ce membre</td>
-            </tr>
-        {% endfor %}
+                {% if galerie.publiee %}
+                    <tr>
+                        <td>{{ galerie.id }}</td>
+                        <td>{{ galerie.name }}</td>
+                        <td>{{ galerie.description }}</td>
+                        <td>{{ galerie.publiee ? 'Yes' : 'No' }}</td>
+                        <td>
+                            <a href="{{ path('app_galerie_show', {'id': galerie.id}) }}">Voir</a>
+                                {% if app.user and app.user.id == member.id %}
+                            <a href="{{ path('app_galerie_edit', {'id': galerie.id}) }}">Modifier</a>
+                            	{% endif %}
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        
+            {% for galerie in galeries %}
+                {% if not galerie.publiee and app.user and app.user.id == member.id %}
+                    <tr>
+                        <td>{{ galerie.id }}</td>
+                        <td>{{ galerie.name }}</td>
+                        <td>{{ galerie.description }}</td>
+                        <td>{{ galerie.publiee ? 'Yes' : 'No' }}</td>
+                        <td>
+                            <a href="{{ path('app_galerie_show', {'id': galerie.id}) }}">Voir</a>
+                            <a href="{{ path('app_galerie_edit', {'id': galerie.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            
+            {% if galeries|length == 0 %}
+                <tr>
+                    <td colspan="4">Aucune galerie trouvée pour ce membre</td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
+    {% if app.user and app.user.id == member.id %}
     <a href="{{ path('app_galerie_new', {'id': member.id}) }}">Creer une nouvelle galerie</a>
-
+	{% endif %}
     <br>
     <br>
     <a href="{{ path('app_member') }}">Retour à la liste des membres</a>

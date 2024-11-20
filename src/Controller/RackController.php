@@ -38,6 +38,20 @@ class RackController extends AbstractController
         $rackRepo = $doctrine->getRepository(Rack::class);
         $rack = $rackRepo->find($id);
         
+        // Vérification si le rack existe
+        if (!$rack) {
+            throw $this->createNotFoundException('Rack not found');
+        }
+        
+        $member= $rack ->getMember();
+        $user = $this->getUser();
+        
+        // Vérification si l'utilisateur connecté est le membre associé au rack
+        if (!$user || $member === null || $member->getId() !== $user->getId()) {
+            // Si ce n'est pas le même membre, accès refusé
+            throw $this->createAccessDeniedException("Tu n'as pas le droit d'acceder au presentoir d'un autre membre");
+        }
+        
         return $this->render('rack/show.html.twig',
             [ 'rack'=> $rack ]
             );

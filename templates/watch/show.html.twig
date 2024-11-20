@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}watch n°{{ watch.id }}{% endblock %}
+{% block title %}Montre n°{{ watch.id }}{% endblock %}
 
 {% block main %}
     <h1>{{ watch.name }}</h1>
@@ -14,7 +14,7 @@
                 <td>{{ watch.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
+                <th>Nom</th>
                 <td>{{ watch.name }}</td>
             </tr>
             <tr>
@@ -25,19 +25,16 @@
                 <th>Description</th>
                 <td>{{ watch.description}}</td>
             </tr>
-            <tr>
-                <th>Rack id</th>
-                <td>{{ watch.rack.id}}</td>
-            </tr>
         </tbody>
     </table>
     &nbsp;
-                    <a href="{{ path('app_watch_edit', {'id': watch.id}) }}">edit</a>
-    &nbsp;
-                    <a href="{{ path('app_watch_delete', {'id': watch.id}) }}">delete</a>
+        {% if app.user and app.user.id == watch.rack.member.id %}
+                    <a href="{{ path('app_watch_edit', {'id': watch.id}) }}">modifier</a>
+        {% endif %}
+
 	<br>
 	<br>
-	<a href="{{ path('rack_show', {'id': watch.rack.id}) }}">back to rack</a>
+	<a href="{{ path('rack_show', {'id': watch.rack.id}) }}">revenir au presentoire </a>
 
 
 {% endblock %} {# body #} 

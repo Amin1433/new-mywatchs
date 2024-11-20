@@ -85,25 +85,25 @@ final class GalerieController extends AbstractController
         return $this->redirectToRoute('member_show', ['id' => $galerie -> getCreator()->getId()], Response::HTTP_SEE_OTHER);
     }
     
-    #[Route('/watch/{id}', name: 'app_galerie_watch_show', requirements: ['id' => '\d+'])]
-    public function watchShow(
-        #[MapEntity(id: 'galerie_id')]
-        Galerie $galerie,
-        #[MapEntity(id: 'watch_id')]
-        Watch $watch
-        ): Response
-        {
-            // Vérification : la montre appartient-elle à la galerie ?
-            if (! $galerie->getWatches()->contains($watch)) {
-                throw $this->createNotFoundException("Cette montre n'appartient pas à cette galerie.");
-            }
-            
-            // Vérification : la galerie est-elle publiée ?
-            if (! $galerie->isPublished()) {
-                throw $this->createAccessDeniedException("Vous n'avez pas accès à cette ressource.");
-            }
-            
-            return $this->render('watch/show.html.twig',
-               [ 'watch' => $watch, 'galerie' => $galerie ]);
+    //#[Route('/watch/{id}', name: 'app_galerie_watch_show', requirements: ['id' => '\d+'])]
+    //public function watchShow(Request $request,
+      //  #[MapEntity(id: 'galerie_id')]
+        //Galerie $galerie,
+        //#[MapEntity(id: 'watch_id')]
+        //Watch $watch
+        //): Response {
+          //  return $this->render('galerie/watch_show.html.twig', [
+            //    'watch' => $watch
+           // ]);
+    //}
+    #[Route('/watch/{id}', name: 'app_galerie_watch_show', methods: ['GET'])]
+    public function watchShow(Watch $watch,  Galerie $galerie): Response
+    {
+        return $this->render('galerie/watchshow.html.twig', [
+            'watch' => $watch,
+            'galerie' => $galerie,
+        ]);
     }
+    
+    
 }
